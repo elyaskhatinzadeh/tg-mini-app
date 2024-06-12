@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Web App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <h1>Telegram Web App</h1>
+    <div id="dataContainer">
+        <p id="initData">Loading...</p>
+        <p id="username"></p>
+        <p id="firstName"></p>
+        <p id="lastName"></p>
+        <p id="theme"></p>
+        <p id="viewport"></p>
+    </div>
+
+    <script>
+        // Ensure Telegram Web Apps SDK is initialized
+        Telegram.WebApp.ready();
+
+        // Retrieve data from Telegram Web Apps SDK
+        const initData = Telegram.WebApp.initData || 'No init data available';
+        const user = Telegram.WebApp.initDataUnsafe.user || {};
+        const themeParams = Telegram.WebApp.themeParams || {};
+        const viewportHeight = Telegram.WebApp.viewportHeight || 'Unknown';
+
+        // Display data
+        document.getElementById('initData').textContent = `Init Data: ${initData}`;
+        document.getElementById('username').textContent = `Username: ${user.username || 'Not available'}`;
+        document.getElementById('firstName').textContent = `First Name: ${user.first_name || 'Not available'}`;
+        document.getElementById('lastName').textContent = `Last Name: ${user.last_name || 'Not available'}`;
+        document.getElementById('theme').textContent = `Theme: ${themeParams.colorScheme || 'Default'}`;
+        document.getElementById('viewport').textContent = `Viewport Height: ${viewportHeight}`;
+
+        // Log the data for debugging purposes
+        console.log('Init Data:', initData);
+        console.log('User:', user);
+        console.log('Theme Params:', themeParams);
+        console.log('Viewport Height:', viewportHeight);
+    </script>
+</body>
+</html>
